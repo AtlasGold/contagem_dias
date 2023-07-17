@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Contagem de Tempo</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        
+        .countdown {
+            text-align: center;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown"></div>
+
+    <script>
+        window.onload = function() {
+            var days = 2; // Inicialize com 2 dias
+            var hours = 18;
+            var minutes = 26;
+            var seconds = 0;
+            var countdownElement = document.getElementById("countdown");
+
+            setInterval(function() {
+                seconds++;
+                if (seconds === 60) {
+                    minutes++;
+                    seconds = 0;
+                }
+                if (minutes === 60) {
+                    hours++;
+                    minutes = 0;
+                }
+                if (hours === 24) {
+                    days++;
+                    hours = 0;
+                }
+
+                countdownElement.innerHTML = "Estamos há " + days + " dias, " + hours + " horas, " + minutes + " minutos e " + seconds + " segundos sem o estagiário derrubar um banco de produção.";
+            }, 1000); // Atualize a cada segundo
+        }
+    </script>
+</body>
+</html>
