@@ -23,10 +23,13 @@
 
     <script>
         window.onload = function() {
-            var days = 0; // Inicialize com 2 dias
-            var hours = 18;
-            var minutes = 32;
-            var seconds = 15;
+            var startDate = new Date("July 17, 2023 00:00:00");
+            var currentDate = new Date();
+            var timeDifference = currentDate.getTime() - startDate.getTime();
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            var minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            var seconds = Math.floor((timeDifference / 1000) % 60);
             var countdownElement = document.getElementById("countdown");
 
             setInterval(function() {
@@ -45,7 +48,27 @@
                 }
 
                 countdownElement.innerHTML = "Estamos há " + days + " dias, " + hours + " horas, " + minutes + " minutos e " + seconds + " segundos sem o estagiário derrubar um banco de produção.";
+
+                // Salvar os valores da contagem no armazenamento local
+                localStorage.setItem("days", days);
+                localStorage.setItem("hours", hours);
+                localStorage.setItem("minutes", minutes);
+                localStorage.setItem("seconds", seconds);
             }, 1000); // Atualize a cada segundo
+
+            // Recuperar os valores da contagem do armazenamento local
+            if (localStorage.getItem("days")) {
+                days = parseInt(localStorage.getItem("days"));
+            }
+            if (localStorage.getItem("hours")) {
+                hours = parseInt(localStorage.getItem("hours"));
+            }
+            if (localStorage.getItem("minutes")) {
+                minutes = parseInt(localStorage.getItem("minutes"));
+            }
+            if (localStorage.getItem("seconds")) {
+                seconds = parseInt(localStorage.getItem("seconds"));
+            }
         }
     </script>
 </body>
